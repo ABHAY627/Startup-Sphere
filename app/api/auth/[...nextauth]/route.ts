@@ -8,7 +8,6 @@ export const { handlers: { GET, POST }, auth } = NextAuth({
             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
         })
     ],
-    // ...add more options here if needed
 });
 
 

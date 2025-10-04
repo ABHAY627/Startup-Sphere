@@ -20,8 +20,8 @@ const workSans = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Your App Title",
-    description: "Your App Description",
+    title: "Startup Sphere",
+    description: "A leading startup enhancing platform helping the new and emerging startups to grow and scale",
 };
 
 export default function RootLayout({

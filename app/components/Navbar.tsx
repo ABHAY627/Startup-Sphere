@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from "next/link";
 import Image from 'next/image'
-import {auth,signOut,signIn} from "@/Auth";
+import { auth, signOut, signIn } from "@/Auth";
+import Button from "@mui/material/Button";
+import Avatar from '@mui/material/Avatar';
 
 // server side rendering chal rhi bhot achhe se
-//ye async vali functionality vahin se aayi hai
+// ye async vali functionality vahin se aayi hai
 const Navbar = async () => {
     const session = await auth();
     return (
@@ -13,27 +15,36 @@ const Navbar = async () => {
                 <Link href='/'>
                     <Image src="/logo.png" alt="logo" width={144} height={40} />
                 </Link>
-                <div className="flex items-center gap-5 text-black">
+                <div className="flex items-center justify-between min-w-[340px] gap-6 text-black ml-auto">
                     {session?.user ? (
                         <>
                             <Link href="/startup/create">
-                                <span>Create</span>
+                                <span>
+                                    CREATE
+                                </span>
                             </Link>
-
                             <form
                                 action={async () => {
                                     "use server";
-
                                     await signOut({ redirectTo: "/" });
                                 }}
                             >
-                                <button type="submit">
-                                    <span className="max-sm:hidden">Logout</span>
-                                </button>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        backgroundColor: "#7B2D26",
+                                        color: "#fff",
+                                        "&:hover": {
+                                            backgroundColor: "#5A1F19"
+                                        }
+                                    }}
+                                    type="submit"
+                                >
+                                    Logout
+                                </Button>
                             </form>
-
                             <Link href={`/user/${session.user.id}`}>
-                                <span>{session.user.name}</span>
+                                <Avatar sx={{ bgcolor: "#000000", color: "#fff" }} src="/broken-image.jpg" />
                             </Link>
                         </>
                     ) : (
@@ -43,9 +54,19 @@ const Navbar = async () => {
                                 await signIn("github");
                             }}
                         >
-                            <button type="submit" className="px-4 py-2 bg-black text-white rounded">
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    backgroundColor: "#7B2D26",
+                                    color: "#fff",
+                                    "&:hover": {
+                                        backgroundColor: "#5A1F19"
+                                    }
+                                }}
+                                type="submit"
+                            >
                                 Login
-                            </button>
+                            </Button>
                         </form>
                     )}
                 </div>
